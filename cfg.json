@@ -1,0 +1,13 @@
+{
+  "comparto": "CMD",
+  "database": "C:/DATA/SVIL/geocomp/2019/acea/rilievo/restituzione_rilievo_fgn.sqlite",
+  "name": "ok",
+  "nome": "ppp",
+  "parametro": "pippo",
+  "pippo": "pippo",
+  "prova1": "C:\\DATA\\SVIL\\geocomp\\2019\\acea\\rilievo\\farlocco.csv",
+  "prova2": "C:\\DATA\\SVIL\\geocomp\\2019\\acea\\rilievo\\ACEA (4).accdb",
+  "rilievo": "C:/DATA/SVIL/geocomp/2019/acea/rilievo/rilievo.csv",
+  "rilievopunti": "C:/DATA/SVIL/geocomp/2019/acea/rilievo/vitto.csv",
+  "srid": 25833
+}
