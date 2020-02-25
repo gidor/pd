@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"path/filepath"
 	"strings"
 
 	"github.com/spf13/cobra"
@@ -34,6 +35,9 @@ var fileCmd = &cobra.Command{
 			f, err := fdialog.Load()
 			check(err)
 			setParam(parName, f)
+			setParam(parName+"_base", filepath.Base(f))
+			setParam(parName+"_ext", filepath.Ext(f))
+			setParam(parName+"_dir", filepath.Dir(f))
 		}
 	},
 }
