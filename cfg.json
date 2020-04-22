@@ -1,6 +1,10 @@
 {
   "comparto": "CMD",
   "database": "C:/DATA/SVIL/geocomp/2019/acea/rilievo/restituzione_rilievo_fgn.sqlite",
+  "dirdir": "C:\\DATA\\firma",
+  "dirdir_base": "firma",
+  "dirdir_dir": "C:\\DATA",
+  "dirdir_ext": "",
   "name": "ok",
   "nome": "ppp",
   "parametro": "pippo",

@@ -1,6 +1,8 @@
 package cmd
 
 import (
+	"path/filepath"
+
 	"github.com/spf13/cobra"
 
 	"github.com/sqweek/dialog"
@@ -32,6 +34,10 @@ var dirCmd = &cobra.Command{
 			f, err := dialog.Directory().Title(title).Browse()
 			check(err)
 			setParam(parName, f)
+			setParam(parName+"_base", filepath.Base(f))
+			setParam(parName+"_ext", filepath.Ext(f))
+			setParam(parName+"_dir", filepath.Dir(f))
+
 		}
 	},
 }
