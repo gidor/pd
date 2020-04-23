@@ -1,8 +1,6 @@
 package cmd
 
 import (
-	"path/filepath"
-
 	"github.com/spf13/cobra"
 
 	"github.com/sqweek/dialog"
@@ -18,9 +16,7 @@ func init() {
 var dirCmd = &cobra.Command{
 	Use:   "dir",
 	Short: "manage dir parameter ",
-	Long: `manage dir parameter Generator built with
-				  love by spf13 and friends in Go.
-				  Complete documentation is available at http://hugo.spf13.com`,
+	Long:  `manage dir parameter `,
 	Run: func(cmd *cobra.Command, args []string) {
 		// Do Stuff Here
 		// dir, err := filepath.Abs(filepath.Dir(os.Args[0]))
@@ -33,10 +29,12 @@ var dirCmd = &cobra.Command{
 		if len(parName) > 0 {
 			f, err := dialog.Directory().Title(title).Browse()
 			check(err)
-			setParam(parName, f)
-			setParam(parName+"_base", filepath.Base(f))
-			setParam(parName+"_ext", filepath.Ext(f))
-			setParam(parName+"_dir", filepath.Dir(f))
+			setPathParam(parName, f)
+			// setParam(parName, f)
+			// setParam(parName+"_base", filepath.Base(f))
+			// setParam(parName+"_dir_base", filepath.Base(filepath.Dir(f)))
+			// setParam(parName+"_ext", filepath.Ext(f))
+			// setParam(parName+"_dir", filepath.Dir(f))
 
 		}
 	},

@@ -41,6 +41,19 @@ func rootPath() string {
 	return dir
 }
 
+func setPathParam(name string, value string) {
+	base := filepath.Base(value)
+	ext := filepath.Ext(value)
+	dir := filepath.Dir(value)
+	fname := base[0 : len(base)-len(ext)]
+	setParam(name, value)
+	setParam(name+"_base", base)
+	setParam(name+"_bsase_dir", filepath.Base(dir))
+	setParam(name+"_ext", ext)
+	setParam(name+"_dir", dir)
+	setParam(name+"_fname", fname)
+}
+
 func setParam(name string, value string) {
 	if len(configName) == 0 {
 		configName = "cfg"
@@ -49,7 +62,7 @@ func setParam(name string, value string) {
 		value = strings.ReplaceAll(value, "\\", "/")
 	}
 	confile := path.Join(basePath, configName+".json")
-	fmt.Println(confile)
+	// fmt.Println(confile)
 	var cfg map[string]interface{}
 
 	if _, err := os.Stat(confile); err == nil {
@@ -81,10 +94,8 @@ func setParam(name string, value string) {
 
 var rootCmd = &cobra.Command{
 	Use:   "pd",
-	Short: "pd Hugo is a very fast static site generator",
-	Long: `A Fast and Flexible Static Site Generator built with
-				  love by spf13 and friends in Go.
-				  Complete documentation is available at http://hugo.spf13.com`,
+	Short: "pd path end dialog",
+	Long:  `pd dialog for simple batch procedure`,
 	Run: func(cmd *cobra.Command, args []string) {
 		if len(parName) > 0 {
 			setParam(parName, parValue)

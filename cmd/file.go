@@ -1,7 +1,6 @@
 package cmd
 
 import (
-	"path/filepath"
 	"strings"
 
 	"github.com/spf13/cobra"
@@ -21,9 +20,7 @@ func init() {
 var fileCmd = &cobra.Command{
 	Use:   "file",
 	Short: "manage file parameter ",
-	Long: `manage file parameter
-				  love by spf13 and friends in Go.
-				  Complete documentation is available at http://hugo.spf13.com`,
+	Long:  `manage file parameter`,
 	Run: func(cmd *cobra.Command, args []string) {
 		// Do Stuff Here
 		if len(parName) > 0 {
@@ -34,10 +31,12 @@ var fileCmd = &cobra.Command{
 			}
 			f, err := fdialog.Load()
 			check(err)
-			setParam(parName, f)
-			setParam(parName+"_base", filepath.Base(f))
-			setParam(parName+"_ext", filepath.Ext(f))
-			setParam(parName+"_dir", filepath.Dir(f))
+			setPathParam(parName, f)
+			// setParam(parName, f)
+			// setParam(parName+"_base", filepath.Base(f))
+			// setParam(parName+"_dir_base", filepath.Base(filepath.Dir(f)))
+			// setParam(parName+"_ext", filepath.Ext(f))
+			// setParam(parName+"_dir", filepath.Dir(f))
 		}
 	},
 }
