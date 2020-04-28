@@ -1,10 +1,7 @@
 package cmd
 
 import (
-
-	//"github.com/gidor/pd/dlg"
 	"github.com/gen2brain/dlgs"
-	// "github.com/martinlindhe/inputbox"
 	"github.com/spf13/cobra"
 )
 

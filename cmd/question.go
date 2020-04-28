@@ -1,17 +1,11 @@
 package cmd
 
 import (
-
-	//"github.com/gidor/pd/dlg"
 	"github.com/gen2brain/dlgs"
-	// "github.com/martinlindhe/inputbox"
 	"github.com/spf13/cobra"
 )
 
 func init() {
-	// askCmd.Flags().StringVarP(&msgtitle, "title", "t", "", "dialog title")
-	// askCmd.Flags().StringVarP(&message, "msg", "m", "", "message to display")
-	// askCmd.Flags().StringVarP(&defvalue, "def", "d", "", "valore iniziale")
 
 	rootCmd.AddCommand(questionCmd)
 }

@@ -1,8 +1,11 @@
 package cmd
 
 import (
+	"runtime"
+
 	"github.com/spf13/cobra"
 
+	"github.com/gen2brain/dlgs"
 	"github.com/sqweek/dialog"
 )
 
@@ -26,16 +29,18 @@ var dirCmd = &cobra.Command{
 		// for i, j := 0, len(os.Args); i < j; i++ {
 		// 	fmt.Println(i, os.Args[i])
 		// }
-		if len(parName) > 0 {
-			f, err := dialog.Directory().Title(title).Browse()
+		if runtime.GOOS == "windows" {
+			if len(parName) > 0 {
+				f, err := dialog.Directory().Title(title).Browse()
+				check(err)
+				setPathParam(parName, f)
+			}
+		} else if runtime.GOOS == "linux" {
+			f, ok, err := dlgs.File(title, "", true)
 			check(err)
-			setPathParam(parName, f)
-			// setParam(parName, f)
-			// setParam(parName+"_base", filepath.Base(f))
-			// setParam(parName+"_dir_base", filepath.Base(filepath.Dir(f)))
-			// setParam(parName+"_ext", filepath.Ext(f))
-			// setParam(parName+"_dir", filepath.Dir(f))
-
+			if ok {
+				setPathParam(parName, f)
+			}
 		}
 	},
 }
