@@ -55,13 +55,18 @@ func setPathParam(name string, value string) {
 }
 
 func setParam(name string, value string) {
+	var confile string
 	if len(configName) == 0 {
-		configName = "cfg"
+		configName = "cfg.json"
+		confile = path.Join(basePath, configName+".json")
+	} else {
+		confile = path.Join(configName)
 	}
+
 	if convPath {
 		value = strings.ReplaceAll(value, "\\", "/")
 	}
-	confile := path.Join(basePath, configName+".json")
+	// confile := path.Join(basePath, configName+".json")
 	// fmt.Println(confile)
 	var cfg map[string]interface{}
 
