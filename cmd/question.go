@@ -1,7 +1,9 @@
+/*
+Copyright © 2021 Gianni Doria  <gianni.doria@gmail.com>
+*/
 package cmd
 
 import (
-	"github.com/gen2brain/dlgs"
 	"github.com/spf13/cobra"
 )
 
@@ -15,10 +17,10 @@ var questionCmd = &cobra.Command{
 	Short: "ask a Yes/No question  to user",
 	Long:  `ask Yes/Noquestion to user and store answare as a key value`,
 	Run: func(cmd *cobra.Command, args []string) {
-		// Do Stuff Here
 		if len(parName) > 0 {
-			ok, err := dlgs.Question(title, message, true)
-			check(err)
+			iniCfg()
+			defer finalizeCfg()
+			ok := dlgYesNo(message, title) //dlgs.Question(title, message, true)
 			if ok {
 				setParam(parName, "ok")
 			}

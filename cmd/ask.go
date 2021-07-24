@@ -1,7 +1,9 @@
+/*
+Copyright © 2021 Gianni Doria  <gianni.doria@gmail.com>
+*/
 package cmd
 
 import (
-	"github.com/gen2brain/dlgs"
 	"github.com/spf13/cobra"
 )
 
@@ -20,15 +22,13 @@ var askCmd = &cobra.Command{
 	Short: "ask question to user",
 	Long:  `ask question to user and store answare as a key value`,
 	Run: func(cmd *cobra.Command, args []string) {
-		// Do Stuff Here
 		if len(parName) > 0 {
-			value, ok, err := dlgs.Entry(title, message, defvalue)
-			if ok {
-				check(err)
-				setParam(parName, value)
-			}
-			// fmt.Println(ok)
-			// fmt.Println(value)
+			iniCfg()
+			defer finalizeCfg()
+			value, err := promptMessage(message)
+			// value, ok, err := dlgs.Entry(title, message, defvalue)
+			check(err)
+			setParam(parName, value)
 		}
 	},
 }
