@@ -1,3 +1,10 @@
 pd.exe
 bin/**/*
 vendor/**/*
+*.json
+*.yml
+*.yaml
+^launch.json
+^Taskfile_linux.yml
+^Taskfile_windows.yml
+^Taskfile.yml
