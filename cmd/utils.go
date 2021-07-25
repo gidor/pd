@@ -32,11 +32,12 @@ const (
 )
 
 var (
-	convDelimiter int8   = none
-	convPath      bool   = false
-	cfgext        int8   = undef
-	ver           string = "1.1"
-	prod          string = "pd"
+	convWin  bool   = false
+	convUnix bool   = false
+	convPath bool   = false
+	cfgext   int8   = undef
+	ver      string = "1.1"
+	prod     string = "pd"
 	// inputFile     string                 = ""
 	// outputFile    string                 = ""
 	pretty     bool                   = true
@@ -46,10 +47,13 @@ var (
 )
 
 func format(value string) string {
-	if convDelimiter == win {
+	if convWin {
 		return strings.ReplaceAll(value, "/", "\\")
 	}
-	if convDelimiter == unix {
+	if convUnix {
+		return strings.ReplaceAll(value, "\\", "/")
+	}
+	if convPath {
 		return strings.ReplaceAll(value, "\\", "/")
 	}
 	return value
@@ -337,10 +341,7 @@ func setParam(name string, value string) {
 func getParam(name string) string {
 	val, ok := data[name].(string)
 	if ok {
-		if convPath {
-			val = strings.ReplaceAll(val, "\\", "/")
-		}
-		return val
+		return format(val)
 	}
 	return ""
 }

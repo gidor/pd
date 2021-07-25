@@ -13,9 +13,9 @@ import (
 func init() {
 	rootCmd.PersistentFlags().StringVarP(&configName, "cfg", "c", "cfg", "configuration name ")
 	rootCmd.PersistentFlags().StringVarP(&parName, "name", "n", "", "parameter name")
-	rootCmd.PersistentFlags().Int8VarP(&convDelimiter, "win", "w", win, "convert path delimiter using win (backslash)")
-	rootCmd.PersistentFlags().Int8VarP(&convDelimiter, "unix", "u", unix, "convert path delimiter using unix (slash)")
-	rootCmd.PersistentFlags().Int8VarP(&convDelimiter, "path", "p", unix, "convert path delimiter using unix (slash)")
+	rootCmd.PersistentFlags().BoolVarP(&convWin, "win", "w", false, "convert path delimiter using win (backslash)")
+	rootCmd.PersistentFlags().BoolVarP(&convUnix, "unix", "u", false, "convert path delimiter using unix (slash)")
+	rootCmd.PersistentFlags().BoolVarP(&convPath, "path", "p", false, "convert path delimiter using unix (slash)")
 	rootCmd.PersistentFlags().BoolVarP(&jyout, "jy", "2", false, "dual config output")
 	rootCmd.PersistentFlags().StringVarP(&parValue, "value", "v", "", "parameter value")
 
