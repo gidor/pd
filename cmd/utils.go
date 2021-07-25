@@ -16,7 +16,7 @@ import (
 	"github.com/sqweek/dialog"
 )
 
-var configName, parName, parValue, basePath, title, message string
+var cwd, configName, parName, parValue, basePath, title, message string
 
 const (
 	undef   = iota
@@ -37,8 +37,13 @@ var (
 	htmlescape bool                   = false
 )
 
+func init() {
+	path, err := os.Getwd()
+	check(err)
+	cwd = path
+}
 func iniCfg() {
-
+	os.Chdir(cwd)
 	if len(configName) == 0 {
 		configName = "cfg.json"
 		cfgext = jsoncfg
@@ -64,6 +69,7 @@ func iniCfg() {
 }
 
 func finalizeCfg() {
+	os.Chdir(cwd)
 	switch cfgext {
 	case jsoncfg:
 		finJson(configName)
