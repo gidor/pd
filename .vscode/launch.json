@@ -11,10 +11,18 @@
             "mode": "debug",
             "program": "${workspaceFolder}/pd.go",
             "args": [
-                "get",
-                "-c",
-                "cfg.json",
-                "prova1",
+                "file",
+                "--jy", 
+                "-c", 
+                "config", 
+                "-n", 
+                "DB",  
+                "-m", 
+                "Nome del geopkg di rilievo", "-t", "geopkg di rilievo",
+                // "get",
+                // "-c",
+                // "cfg.json",
+                // "prova1",
             ]
         }
     ]
