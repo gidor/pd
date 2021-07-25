@@ -8,6 +8,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"path"
 	"path/filepath"
 	"strings"
 
@@ -41,14 +42,8 @@ func init() {
 	path, err := os.Getwd()
 	check(err)
 	cwd = path
-	println("INIT " + cwd)
 }
 func iniCfg() {
-	path, _ := os.Getwd()
-	println("initcfg 1 " + path)
-	os.Chdir(cwd)
-	path, _ = os.Getwd()
-	println("initcfg 2  " + path)
 
 	if len(configName) == 0 {
 		configName = "cfg.json"
@@ -75,12 +70,6 @@ func iniCfg() {
 }
 
 func finalizeCfg() {
-	path, _ := os.Getwd()
-	println("finalizeCfg 1 " + path)
-	os.Chdir(cwd)
-	path, _ = os.Getwd()
-	println("finalizeCfg 2  " + path)
-
 	switch cfgext {
 	case jsoncfg:
 		finJson(configName)
@@ -105,8 +94,9 @@ func finalizeCfg() {
 }
 
 func iniJson(confname string) {
+	patf := path.Join(cwd, confname)
 	if _, err := os.Stat(confname); err == nil {
-		in, err := os.OpenFile(confname, os.O_RDONLY, 0755)
+		in, err := os.OpenFile(patf, os.O_RDONLY, 0755)
 		check(err)
 		din, err := cj.Load(in)
 		in.Close()
@@ -118,8 +108,9 @@ func iniJson(confname string) {
 }
 
 func iniYaml(confname string) {
-	if _, err := os.Stat(confname); err == nil {
-		in, err := os.OpenFile(confname, os.O_RDONLY, 0755)
+	patf := path.Join(cwd, confname)
+	if _, err := os.Stat(patf); err == nil {
+		in, err := os.OpenFile(patf, os.O_RDONLY, 0755)
 		check(err)
 		din, err := cy.Load(in)
 		in.Close()
@@ -131,7 +122,9 @@ func iniYaml(confname string) {
 }
 
 func finJson(confname string) {
-	out, err := os.Create(confname)
+	patf := path.Join(cwd, confname)
+
+	out, err := os.Create(patf)
 	check(err)
 	err = cj.Save(&data, out, pretty, htmlescape)
 	out.Close()
@@ -139,7 +132,8 @@ func finJson(confname string) {
 }
 
 func finYaml(confname string) {
-	out, err := os.Create(confname)
+	patf := path.Join(cwd, confname)
+	out, err := os.Create(patf)
 	check(err)
 	err = cy.Save(&data, out, pretty, htmlescape)
 	out.Close()
@@ -215,9 +209,9 @@ func check(e error) {
 }
 
 func rootPath() string {
-	dir, err := filepath.Abs(filepath.Dir(os.Args[0]))
-	check(err)
-	return dir
+	// dir, err := filepath.Abs(filepath.Dir(os.Args[0]))
+	// check(err)
+	return cwd
 }
 
 func setPathParam(name string, value string) {
