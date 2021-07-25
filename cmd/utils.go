@@ -25,18 +25,35 @@ const (
 	yamlcfg = iota
 )
 
+const (
+	none = iota
+	win  = iota
+	unix = iota
+)
+
 var (
-	convPath   bool                   = false
-	cfgext     int8                   = undef
-	ver        string                 = "1.0"
-	prod       string                 = "pd"
-	inputFile  string                 = ""
-	outputFile string                 = ""
+	convDelimiter int8   = none
+	convPath      bool   = false
+	cfgext        int8   = undef
+	ver           string = "1.1"
+	prod          string = "pd"
+	// inputFile     string                 = ""
+	// outputFile    string                 = ""
 	pretty     bool                   = true
 	jyout      bool                   = false
 	data       map[string]interface{} = make(map[string]interface{})
 	htmlescape bool                   = false
 )
+
+func format(value string) string {
+	if convDelimiter == win {
+		return strings.ReplaceAll(value, "/", "\\")
+	}
+	if convDelimiter == unix {
+		return strings.ReplaceAll(value, "\\", "/")
+	}
+	return value
+}
 
 func init() {
 	path, err := os.Getwd()
@@ -228,10 +245,7 @@ func setPathParam(name string, value string) {
 }
 
 func setParam(name string, value string) {
-	if convPath {
-		value = strings.ReplaceAll(value, "\\", "/")
-	}
-	data[name] = value
+	data[name] = format(value)
 }
 
 // func setp(path string, value string) {
