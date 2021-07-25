@@ -6,7 +6,10 @@ vars:
   GREETING: Hello, World!
   BIN: ./bin
   SRC: '*.go'
-  CLI: pd.exe
+  CLI: pd
+
+includes:
+  build: ./Taskfile_{{OS}}.yml
 
 tasks:
   fmt:
@@ -26,12 +29,34 @@ tasks:
 
   cli: 
     cmds:
-      - mkdir -p {{ .BIN }}
-      - go build -o {{ .BIN }}/{{ .CLI }}
+      - task build:cli 
 
   install_deps:
     cmds:
       - go get -v ./...
+
+  winc:
+    env:
+      GOOS: windows
+      GOARCH: 386
+      # CGO_ENABLED: 1
+      # CXX: i686-w64-mingw32-g++
+      # CC: i686-w64-mingw32-gcc
+    cmds:
+      - mkdir -p {{ .BIN }}
+      - go build -o {{ .BIN }}/{{ .CLI }}.exe
+
+  linuxc:
+    env:
+      GOOS: linux
+      GOARCH: 386
+      # CGO_ENABLED: 1
+      # CXX: i686-w64-mingw32-g++
+      # CC: i686-w64-mingw32-gcc
+    cmds:
+      - mkdir -p {{ .BIN }}
+      - go build -o {{ .BIN }}/{{ .CLI }}_
+
 
   clean:
     cmds:
