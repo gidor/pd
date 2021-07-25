@@ -44,6 +44,9 @@ func iniCfg() {
 		cfgext = jsoncfg
 	} else {
 		switch ext := filepath.Ext(configName); ext {
+		case "":
+			configName = configName + ".json"
+			cfgext = jsoncfg
 		case ".json", ".JSON":
 			cfgext = jsoncfg
 		case ".yaml", ".yml", ".YML", ".YAML":

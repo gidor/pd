@@ -6,7 +6,7 @@ vars:
   GREETING: Hello, World!
   BIN: ./bin
   SRC: '*.go'
-  CLI: pd
+  CLI: pd.exe
 
 tasks:
   fmt:
