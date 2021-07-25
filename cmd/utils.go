@@ -41,9 +41,15 @@ func init() {
 	path, err := os.Getwd()
 	check(err)
 	cwd = path
+	println("INIT " + cwd)
 }
 func iniCfg() {
+	path, _ := os.Getwd()
+	println("initcfg 1 " + path)
 	os.Chdir(cwd)
+	path, _ = os.Getwd()
+	println("initcfg 2  " + path)
+
 	if len(configName) == 0 {
 		configName = "cfg.json"
 		cfgext = jsoncfg
@@ -69,7 +75,12 @@ func iniCfg() {
 }
 
 func finalizeCfg() {
+	path, _ := os.Getwd()
+	println("finalizeCfg 1 " + path)
 	os.Chdir(cwd)
+	path, _ = os.Getwd()
+	println("finalizeCfg 2  " + path)
+
 	switch cfgext {
 	case jsoncfg:
 		finJson(configName)
